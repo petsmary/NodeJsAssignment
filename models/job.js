@@ -1,17 +1,16 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const jobSchema = mongoose.Schema({
+var mongoose = require('mongoose');
+var jobSchema = mongoose.Schema({
                                   position      :   String,
                                   category      :   String,
                                   company       :   String,
                                   description   :   String,
                                   type          :   String,
-                                  salary        :   Number
-                                  post_date: { type: Date, default: Date.now }
-                                  comments: [{ body: String, date: Date }],
+                                  salary        :   Number,
+                                  post_date: { type: Date, default: Date.now },
+                                  comments: [{ body: String, date: Date }]
                                   });
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/assignment', { useMongoClient: true });
+var job = module.exports = mongoose.model('Job', jobSchema);
 
-module.exports = mongoose.model('job', jobSchema);
-
+module.exports.createJob = function(newJob, callback){
+    newJob.save(callback);
+}
