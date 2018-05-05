@@ -55,7 +55,7 @@ router.post('/register', function(req, res){
 				if (err.code === 11000) {
 					// Duplicate username
 					req.flash('error_msg', 'User already exist!');
-					res.redirect('/users/login');
+					res.redirect('/users/register');
 				}				
 			} else {
 				console.log(user);
