@@ -40,7 +40,11 @@ router.post('/register', function(req, res){
 	} else {
 		var newUser = new User({
 			name: name,
-			email:email,
+			email: email,			
+			gender: null,
+			address: null,
+			phone: null,
+			dob: null,
 			username: username,
 			password: password
 		});
@@ -61,6 +65,71 @@ router.post('/register', function(req, res){
 		});
 		
 	}
+});
+
+// Update User
+router.post('/update', function(req, res){
+	var phone = req.body.phone;
+	var address = req.body.address;
+	var dob = req.body.dob;
+	var gender = req.body.gender;
+	var name = req.body.name;
+	var email = req.body.email;
+	var username = req.body.username;
+	var password = req.body.password;
+	var newpassword = req.body.newpassword;
+	var newpassword2 = req.body.newpassword2;
+	var xx = req.body.xx;
+
+	// Validation
+	req.checkBody('name', 'Name is required').notEmpty();
+	req.checkBody('email', 'Email is required').notEmpty();
+	req.checkBody('email', 'Email is not valid').isEmail();
+	req.checkBody('username', 'Username is required').notEmpty();
+	req.checkBody('password', 'Password is required').notEmpty();
+	req.checkBody('newpassword2', 'New Passwords do not match').equals(req.body.newpassword);
+	
+	User.comparePassword(password, xx, function(err, isMatch){
+		if(err) throw err;
+		if(isMatch){
+			if (newpassword !== "") {
+				password = newpassword;
+			}
+		
+			var errors = req.validationErrors();
+		
+			if(errors){
+				res.render('editProfile',{
+					errors:errors
+				});
+			} else {
+				var updateUser = {
+					name: name,
+					email: email,
+					gender: gender,
+					address: address,
+					phone: phone,
+					dob: dob,
+					username: username,
+					password: password
+				};
+		
+				User.updateUser(updateUser, function(err, user){
+					if(err) {
+						console.log(err);					
+					} else {
+						console.log(user);
+						req.flash('success_msg', 'Your profile is updated');		
+						res.redirect('/profile/');
+					}
+				});
+				
+			}
+		} else {
+			req.flash('error_msg', 'Invalid password');		
+			res.redirect('/profile/edit');
+		}
+	});
 });
 
 passport.use(new LocalStrategy(

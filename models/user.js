@@ -11,6 +11,22 @@ var UserSchema = mongoose.Schema({
 	password: {
 		type: String
 	},
+	gender: {
+		type: String,
+		default: null
+	},
+	address: {
+		type: String,
+		default: null
+	},
+	phone: {
+		type: String,
+		default: null
+	},
+	dob: {
+		type: String,
+		default: null
+	},
 	email: {
 		type: String,
 		unique:true
@@ -28,6 +44,17 @@ module.exports.createUser = function(newUser, callback){
 	        newUser.password = hash;
 	        newUser.save(callback);
 	    });
+	});
+}
+
+module.exports.updateUser = function(updateUser, callback){
+	User.findById(updateUser.id, function(err, p) {
+		bcrypt.genSalt(10, function(err, salt) {
+			bcrypt.hash(updateUser.password, salt, function(err, hash) {
+				updateUser.password = hash;
+				User.findOneAndUpdate({'username' : updateUser.username}, updateUser, {upsert: true}, callback);
+	    	});
+		});
 	});
 }
 
