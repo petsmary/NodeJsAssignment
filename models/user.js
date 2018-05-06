@@ -33,6 +33,9 @@ var UserSchema = mongoose.Schema({
 	},
 	name: {
 		type: String
+	},
+	userType: {
+		type: String
 	}
 });
 
@@ -48,12 +51,10 @@ module.exports.createUser = function(newUser, callback){
 }
 
 module.exports.updateUser = function(updateUser, callback){
-	User.findById(updateUser.id, function(err, p) {
-		bcrypt.genSalt(10, function(err, salt) {
-			bcrypt.hash(updateUser.password, salt, function(err, hash) {
-				updateUser.password = hash;
-				User.findOneAndUpdate({'username' : updateUser.username}, updateUser, {upsert: true}, callback);
-	    	});
+	bcrypt.genSalt(10, function(err, salt) {
+		bcrypt.hash(updateUser.password, salt, function(err, hash) {
+			updateUser.password = hash;
+			User.findOneAndUpdate({'username' : updateUser.username}, updateUser, {upsert: true}, callback);
 		});
 	});
 }

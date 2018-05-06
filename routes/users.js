@@ -12,6 +12,26 @@ router.get('/register', function(req, res){
 
 // Login
 router.get('/login', function(req, res){
+	User.getUserByUsername("admin", function(err, user){
+		if(err) throw err;
+		if(!user){
+			var newAdmin = new User({
+				name: "admin",
+				email: "admin@recruiteapp.com",			
+				gender: null,
+				address: null,
+				phone: null,
+				dob: null,
+				username: "admin",
+				password: "admin",
+				userType: "admin"
+			});
+	
+			User.createUser(newAdmin, function(err, user){
+				if(err) throw err;
+			});
+		}
+	});
 	res.render('login');
 });
 
@@ -46,7 +66,8 @@ router.post('/register', function(req, res){
 			phone: null,
 			dob: null,
 			username: username,
-			password: password
+			password: password,
+			userType: "employee"
 		});
 
 		User.createUser(newUser, function(err, user){

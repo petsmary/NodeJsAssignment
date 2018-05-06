@@ -3,7 +3,8 @@ var router = express.Router();
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index', { username: req.user.username });
+	//res.render('index', { username: req.user.username });
+	res.redirect('/jobs');
 });
 
 router.get('/message', ensureAuthenticated, function(req, res){

@@ -1,0 +1,61 @@
+<h2 class="page-header">CV</h2>
+
+<div class="container">
+    <table id="cvList" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Document Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each files}}
+        <tr>
+          <td>{{this}}</td>
+          
+          <td><button class="btn btn-default">View</button>
+          <button class="btn btn-default">Delete</button>
+          <button class="btn btn-default">Rename</button></td>
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <th>Document Name</th>
+          <th>Action</th>
+      </tfoot>
+    </table>
+<br/>
+    <form action="/profile/cv/upload" method="post" enctype="multipart/form-data">
+    <h4>Upload CV</h4>
+        <input id="upload" type="file" name="filetoupload">
+        <br>
+        <p>Filename: <input id="filename" type="text" name="filename"/>
+        </p>
+        <input class="btn btn-default" type="submit" value="Upload CV">
+    </form>
+
+</div>
+
+<script>
+     $(document).ready( function () {
+        $('#cvList').DataTable();
+    } );
+    $('#upload').change(function() {
+    var filename = $(this).val();
+    var lastIndex = filename.lastIndexOf("\\");
+    if (lastIndex >= 0) {
+        filename = filename.substring(lastIndex + 1);
+    }
+    $('#filename').val(filename);
+});
+    document.getElementById('upload').onchange = uploadOnChange;
+
+function uploadOnChange() {
+    var filename = this.value;
+    var lastIndex = filename.lastIndexOf("\\");
+    if (lastIndex >= 0) {
+        filename = filename.substring(lastIndex + 1);
+    }
+    document.getElementById('filename').value = filename;
+}
+</script>

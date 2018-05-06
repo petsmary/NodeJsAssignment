@@ -1,0 +1,5 @@
+module.exports = {
+    isEmployee: (user, options)=>{
+        return (user.userType === 'employee') ? options.fn(user) : options.inverse(user);
+    }
+}

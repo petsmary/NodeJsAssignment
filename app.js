@@ -19,12 +19,14 @@ var users = require('./routes/users');
 var jobs = require('./routes/jobs');
 var profile = require('./routes/profile');
 
+var handlebarsHelpers = require('./helpers/handlebars');
+
 // Init App
 var app = express();
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout:'layout'}));
+app.engine('handlebars', exphbs({defaultLayout:'layout', helpers: handlebarsHelpers}));
 app.set('view engine', 'handlebars');
 
 // BodyParser Middleware
@@ -75,8 +77,6 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   next();
 });
-
-
 
 app.use('/', routes);
 app.use('/users', users);

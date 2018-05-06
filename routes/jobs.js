@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/edit', ensureAuthenticated, function(req, res){
-	res.render('editJobExperience', { username: req.user.username });
+var Job = require('../models/job');
+
+router.get('/', ensureAuthenticated, function(req, res) {
+	Job.getAllJobs(function(err, jobs){
+		if(err) throw err;
+		res.render('index', {username: req.user.username, jobs: jobs});
+	});
 });
 
 function ensureAuthenticated(req, res, next){
