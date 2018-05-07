@@ -16,9 +16,9 @@
           <td>{{this.post_date}}</td>
           <td>{{this.subject}}</td>
           <td>{{this.message}}</td>
-          {{#each this.feedback}}
-          <td>{{this.body}} <br>{{this.date}}</td>
-          {{/each}}
+          <td>{{#each this.feedback}}
+          {{this.body}} <br>{{this.date}}
+          {{/each}}</td>
         </tr>
         {{/each}}
       </tbody>

@@ -33,12 +33,12 @@
         <input type="hidden" name="username" value="{{this.username}}"/>  
         
           <td><input class="form-control" type="text" name = "name" value="{{this.name}}">{{this.name}}</td>
-          <td><select id="user_gender" class="form-control" name="gender">
+          <td><select id="user_gender{{this.username}}" class="form-control" name="gender">
                   <option id="Male" value="Male">Male</option>
                   <option id="Female" value="Female">Female</option>
                   
                 </select>{{this.gender}}</td>
-                <script>$('#user_gender').val('{{this.gender}}');</script>
+                <script>$('#user_gender{{this.username}}').val('{{this.gender}}');</script>
           <td><input class="form-control" type="text" id="dob" name = "dob" value="{{this.dob}}">{{this.dob}}</td>
           <td><input class="form-control" type="text" name = "address" value="{{this.address}}">{{this.address}}</td>
           <td><input class="form-control" type="text" name = "phone" value="{{this.phone}}">{{this.phone}}</td>

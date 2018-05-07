@@ -339,6 +339,10 @@ passport.use(new LocalStrategy(
    	User.comparePassword(password, user.password, function(err, isMatch){
    		if(err) throw err;
    		if(isMatch){
+			var epath =  path.join(__dirname, '../') + "uploads/" + user._id;
+			if (!fs.existsSync(epath)){
+				fs.mkdirSync(epath);
+			}
    			return done(null, user);
    		} else {
    			return done(null, false, {message: 'Invalid password'});
@@ -359,7 +363,7 @@ passport.deserializeUser(function(id, done) {
 
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
-  function(req, res) {
+  function(req, res) {	 	
     res.redirect('/');
   });
 
