@@ -30,7 +30,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Date of Birth:</label>
             <div class="col-lg-8">
-              <input type="text" id="dob" class="form-control" name="dob">
+              <input type="text" id="dob" class="form-control" name="dob"  value="{{user.dob}}" >
             </div>
           </div>
           
@@ -105,7 +105,7 @@
 <hr>
 <script type="text/javascript">
   $('#user_gender').val('{{user.gender}}');
-  $('#dob').datepicker("update", '{{user.dob}}');
+  $('#dob').datepicker();
   function goBack() {
     window.history.back()
 }

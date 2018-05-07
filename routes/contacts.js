@@ -40,7 +40,7 @@ router.post('/add', function(req, res){
 			phone: phone,
 			subject: subject,
 			message: message,
-			post_date: new Date().toDateString()
+			post_date: new Date().toUTCString()
 		});
 
 		Contact.createContact(newContact, function(err, contact){
@@ -59,7 +59,6 @@ router.post('/add', function(req, res){
 
 // Add Contact
 router.post('/addlg', function(req, res){
-    console.log('dsvsvs');
 	var name = req.body.name;
 	var email = req.body.email;
 	var username = req.user.username;
@@ -88,7 +87,7 @@ router.post('/addlg', function(req, res){
 			phone: phone,
 			subject: subject,
 			message: message,
-            post_date: new Date().toDateString(),
+            post_date: new Date().toUTCString(),
             username : username
 		});
 
@@ -100,6 +99,42 @@ router.post('/addlg', function(req, res){
 				console.log(contact);
 				req.flash('success_msg', 'Your message is sent');		
 				res.redirect('/contact_us_lg');
+			}
+		});
+		
+	}
+});
+
+// Add Feedback
+router.post('/feedback', function(req, res){
+	var feedback = req.body.feedback;
+	var _id = req.body._id;
+
+	// Validation
+	req.checkBody('feedback', 'Message is required').notEmpty();
+
+	var errors = req.validationErrors();
+
+	if(errors){
+		res.render('contacts',{
+			error:errors,  username: req.user.username 
+		});
+	} else {
+		var newContact = ({
+			feedback: {
+                body :feedback, 
+                date: new Date().toUTCString()
+            }
+		});
+
+		Contact.addFeedback(_id, newContact, function(err, contact){
+			if(err) {
+				console.log(err);
+							
+			} else {
+				console.log(contact);
+				req.flash('success_msg', 'Your feedback is sent');		
+				res.redirect('/contacts');
 			}
 		});
 		

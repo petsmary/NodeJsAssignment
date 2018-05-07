@@ -1,5 +1,8 @@
 module.exports = {
     isEmployee: (user, options)=>{
         return (user.userType === 'employee') ? options.fn(user) : options.inverse(user);
+    },
+    isDeadLine: (user, options)=>{
+        return (new Date(user.deadline) <= new Date()) ? options.fn(user) : options.inverse(user);
     }
 }

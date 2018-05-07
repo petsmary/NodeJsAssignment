@@ -6,9 +6,10 @@ var JobSchema = mongoose.Schema({
                                   description   :   String,
                                   type          :   String,
                                   salary        :   Number,
-                                  post_date: { type: Date, default: Date.now },
-                                  comments: [{ body: String, date: Date }],
-                                  recruitments: [{ employee_id: String, date: Date }]
+                                  post_date: { type: String },
+                                  deadline: { type: String },
+                                  comments: [{ body: String, date: String }],
+                                  recruitments: [{ employee_id: String, date: String }]
                                   });
 var Job = module.exports = mongoose.model('Job', JobSchema);
 
@@ -20,12 +21,16 @@ module.exports.createJob = function(newJob, callback){
     newJob.save(callback);
 }
 
-module.exports.updateJob = function(updateJob, callback){
-	Job.findOneAndUpdate({'_id' : ObjectId(updateJob.id) }, updateJob, {upsert: true}, callback);
+module.exports.updateJob = function(id, updateJob, callback){
+	Job.findOneAndUpdate({'_id' : id }, updateJob, {upsert: true}, callback);
 }
 
 module.exports.deleteJob = function(id, callback){
-	Job.deleteOne( { "_id" : ObjectId(id) } );
+	Job.deleteOne( { "_id" : id } );
+}
+
+module.exports.getJobById = function(id, callback){
+	Job.findById(id, callback);
 }
 
 module.exports.addComment = function(job, newComment, callback){
@@ -33,7 +38,6 @@ module.exports.addComment = function(job, newComment, callback){
     job.save(callback);
 }
 
-module.exports.addRecruitment = function(job, newRecruitment, callback){
-    job.recruitments.push(newRecruitment);
-    job.save(callback);
+module.exports.addRecruitment = function(id, newRecruitment, callback){
+    Job.findOneAndUpdate({'_id' : id }, newRecruitment, {upsert: true}, callback);
 }

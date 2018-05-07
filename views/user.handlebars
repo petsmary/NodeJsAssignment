@@ -4,10 +4,13 @@
 
  <div class="container">
 
- <button class="btn btn-default">Add User</button>
+<form action="/users/addUser">
+ 
+          <input type="submit" value="Add User" class="btn btn-default">
+          </form>
 
 <p></p>
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
       <thead>
         <tr>
           <th>Name</th>
@@ -17,6 +20,7 @@
           <th>Phone Number</th>
           <th>Email</th>
           <th>Username</th>
+          <th>Password</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -24,15 +28,32 @@
         {{#each users}}
         {{#isEmployee this}}
         <tr>
-          <td>{{this.name}}</td>
-          <td>{{this.gender}}</td>
-          <td>{{this.dob}}</td>
-          <td>{{this.address}}</td>
-          <td>{{this.phone}}</td>
-          <td>{{this.email}}</td>
+          <form action="/users/admin/update" method="POST">
+        <input type="hidden" name="xx" value="{{this.password}}"/>        
+        <input type="hidden" name="username" value="{{this.username}}"/>  
+        
+          <td><input class="form-control" type="text" name = "name" value="{{this.name}}">{{this.name}}</td>
+          <td><select id="user_gender" class="form-control" name="gender">
+                  <option id="Male" value="Male">Male</option>
+                  <option id="Female" value="Female">Female</option>
+                  
+                </select>{{this.gender}}</td>
+                <script>$('#user_gender').val('{{this.gender}}');</script>
+          <td><input class="form-control" type="text" id="dob" name = "dob" value="{{this.dob}}">{{this.dob}}</td>
+          <td><input class="form-control" type="text" name = "address" value="{{this.address}}">{{this.address}}</td>
+          <td><input class="form-control" type="text" name = "phone" value="{{this.phone}}">{{this.phone}}</td>
+          <td><input class="form-control" type="email" name = "email" value="{{this.email}}">{{this.email}}</td>
           <td>{{this.username}}</td>
-          <td><button class="btn btn-default">Update</button><button class="btn btn-default">Delete</button></td>
+          <td><input class="form-control" type="password" name = "password" value="{{this.password}}"></td>
+          <td><input type="submit" value="Update" class="btn btn-default">
+          </form>
+          <form action="/users/admin/delete" method="POST">
+          <input type="hidden" name="username" value="{{this.username}}"/>  
+          <input type="submit" value="Delete" class="btn btn-default">
+          </form></td>
+          
           </tr>
+          
           {{/isEmployee}}
         {{/each}}
       </tbody>
@@ -44,20 +65,16 @@
           <th>Phone Number</th>
           <th>Email</th>
           <th>Username</th>
+          <th>Password</th>
           <th>Action</th>
       </tfoot>
     </table>
 </div>
 <br>
 <script>
-  $(document).ready( function () {
-			$('#example')
-				.addClass( 'nowrap' )
-				.dataTable( {
-					responsive: true,
-					columnDefs: [
-						{ targets: [-1, -3], className: 'dt-body-right' }
-					]
-				} );
-		} );
+$(document).ready(function() {
+    $('#example').DataTable();
+  $('#dob').datepicker();
+} );
+
 </script>

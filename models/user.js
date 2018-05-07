@@ -63,6 +63,16 @@ module.exports.updateUser = function(updateUser, callback){
 	});
 }
 
+module.exports.updateUser2 = function(updateUser, callback){
+			User.findOneAndUpdate({'username' : updateUser.username}, updateUser, {upsert: true}, callback);
+		
+}
+
+module.exports.deleteUser = function(username, callback){
+	User.findOneAndRemove({'username' : username}, callback);
+
+}
+
 module.exports.getUserByUsername = function(username, callback){
 	var query = {username: username};
 	User.findOne(query, callback);

@@ -3,23 +3,26 @@
                 <h3>Edit Job Experience</h3>
                 <div id="field">
                 <div id="field0">
+				<div class="form-group">
+           
+              <input type="button" class="btn btn-primary" value="Save Changes">
+			  
+              <span></span>
+              
+			  <a href="/profile" data-original-title="Cancel" type="button"><input type="reset" class="btn btn-default" value="Cancel"></input></a>
+			 
+            
+          </div>
+		   <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div>
+		
 <!-- Text input-->
- 
-    <div class="input-group input-append date" data-provide="datepicker">
-    <input type="text" class="form-control">
-    <span class="input-group-addon add-on">
-        <span class="glyphicon glyphicon-calendar"></span>
-    </span>
-</div>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="action_id">Job Position</label>  
-  <div class="col-md-5">
-  <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md">
-    
-  </div>
-</div>
-<br><br>
-<!-- Text input-->
+   <!-- Text input-->
+   <form class="form-horizontal" role="form">
 <div class="form-group">
   <label class="col-md-4 control-label" for="action_name">Company</label>  
   <div class="col-md-5">
@@ -28,20 +31,43 @@
   </div>
 </div>
 <br><br>
-     
-  <div class="col-sm-6" style="height:130px;">
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker10'>
-                <input type='text' class="form-control" />
+
+	<div class="form-group">
+  <label class="col-md-4 control-label" for="action_id">Job Position</label>  
+  <div class="col-md-5">
+  <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md">
+    
+  </div>
+</div>
+<br><br>
+
+<div class="form-group">
+	<label class="col-md-4 control-label" for="action_id">From</label>  
+		<div class="col-md-5">
+		<div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar">
                     </span>
                 </span>
-            </div>
-        </div>
-    </div>
-    
-	
+		</div>
+	</div>
+</div>
+<br><br>
+<div class="form-group">
+	<label class="col-md-4 control-label" for="action_id">To</label>  
+		<div class="col-md-5">
+		<div class="input-group date" id="datepicker2">
+                <input type="text" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar">
+                    </span>
+                </span>
+		</div>
+	</div>
+</div>
+<br><br>
+  
 </div>
 </div>
 <!-- Button -->
@@ -51,21 +77,30 @@
   </div>
 </div>
 <br><br>
-              
+            </form>  
             </div>
         </div>
+		
     </div>
 	
 <script type="text/javascript">
-
-       
+  $(function () {
+            $("#datepicker").datepicker({
+               format: "mm/yyyy",
+				startView: "years", 
+				minViewMode: "months"
+            });
+        });
+   $(function () {
+            $("#datepicker2").datepicker({
+               format: "mm/yyyy",
+				startView: "years", 
+				minViewMode: "months"
+            });
+        });
 		
 $(document).ready(function () {
- $(function() {
-           $("#datepicker").datepicker({
-		   viewMode: "years",
-           format: 'MM/YYYY'});
-        });
+ 
 
     //@naresh action dynamic childs
     var next = 0;
@@ -74,7 +109,7 @@ $(document).ready(function () {
         var addto = "#field" + next;
         var addRemove = "#field" + (next);
         next = next + 1;
-        var newIn = ' <div id="field'+ next +'" name="field'+ next +'"><!-- Text input--><div class="form-group"> <label class="col-md-4 control-label" for="action_id">Action Id</label> <div class="col-md-5"> <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md"> </div></div><br><br> <!-- Text input--><div class="form-group"> <label class="col-md-4 control-label" for="action_name">Action Name</label> <div class="col-md-5"> <input id="action_name" name="action_name" type="text" placeholder="" class="form-control input-md"> </div></div><br><br><!-- File Button --> <div class="form-group"> <label class="col-md-4 control-label" for="action_json">Action JSON File</label> <div class="col-md-4"> <input id="action_json" name="action_json" class="input-file" type="file"> </div></div></div>';
+        var newIn = ' <div id="field'+ next +'" name="field'+ next +'"><!-- Text input--><div class="form-group"><label class="col-md-4 control-label" for="action_name">Company</label><div class="col-md-5"><input id="action_name" name="action_name" type="text" placeholder="" class="form-control input-md"></div></div><br><br><div class="form-group"><label class="col-md-4 control-label" for="action_id">Job Position</label><div class="col-md-5"><input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md"></div></div><br><br><div class="form-group"><label class="col-md-4 control-label" for="action_id">From</label><div class="col-md-5"><div class="input-group date" id="datepicker"><input type="text" class="form-control" /><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></div></div></div><br><br><div class="form-group"><label class="col-md-4 control-label" for="action_id">To</label><div class="col-md-5"><div class="input-group date" id="datepicker2"><input type="text" class="form-control" /><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></div></div></div><br><br>';
         var newInput = $(newIn);
         var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >Remove</button></div></div><div id="field">';
         var removeButton = $(removeBtn);

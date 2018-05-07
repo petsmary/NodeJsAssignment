@@ -7,10 +7,6 @@ router.get('/', ensureAuthenticated, function(req, res){
 	res.redirect('/jobs');
 });
 
-router.get('/message', ensureAuthenticated, function(req, res){
-	res.render('message', { username: req.user.username });
-});
-
 router.get('/contact_us_lg', ensureAuthenticated, function(req, res){
 	res.render('contact', { username: req.user.username });
 });

@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require("path");
 var router = express.Router();
 
-router.get('/', ensureAuthenticated, function(req, res){
+router.get('/', ensureAuthenticated, function(req, res){	 
 	var dir = './uploads/' + req.user._id + '/profilePhoto/';
 	var files = '/' + req.user._id + '/profilePhoto/';
 

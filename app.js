@@ -19,6 +19,7 @@ var users = require('./routes/users');
 var jobs = require('./routes/jobs');
 var profile = require('./routes/profile');
 var contacts = require('./routes/contacts');
+var message = require('./routes/message');
 
 var handlebarsHelpers = require('./helpers/handlebars');
 
@@ -85,6 +86,7 @@ app.use('/users', users);
 app.use('/jobs', jobs);
 app.use('/profile', profile);
 app.use('/contacts', contacts);
+app.use('/message', message);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
