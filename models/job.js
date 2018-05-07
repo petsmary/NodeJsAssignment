@@ -17,6 +17,12 @@ module.exports.getAllJobs = function(callback){
 	Job.find(callback);
 }
 
+module.exports.getJobsByEid = function(username, callback){
+	var query = {'recruitments': { '$elemMatch':{'employee_id': username}}};
+	var projection ={'position': 1, 'company': 1,'recruitments': { '$elemMatch':{'employee_id': username}}};
+	Job.find(query,projection,callback);
+}
+
 module.exports.createJob = function(newJob, callback){
     newJob.save(callback);
 }

@@ -25,6 +25,7 @@
             {{#if user}}
              {{#isEmployee user}}
 			  <li role="presentation"><a href="/">Jobs</a></li>
+			  <li role="presentation"><a href="/jobs/applied">Applied Jobs</a></li>
 			  <li role="presentation"><a href="/contact_us_lg">Contact Us</a></li>
              
 			  <li class="dropdown">
@@ -41,7 +42,7 @@
         {{else}}
 			  <li role="presentation"><a href="/">Jobs</a></li>
         <li role="presentation"><a href="/users">Users</a></li>
-        <li role="presentation"><a href="/">Recruitments</a></li>
+        <li role="presentation"><a href="/jobs/rec">Recruitments</a></li>
         <li role="presentation"><a href="/contacts">Contacts</a></li>
         <li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{username}}

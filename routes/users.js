@@ -61,6 +61,7 @@ router.post('/register', function(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
 	var password2 = req.body.password2;
+	var userType = req.body.userType;
 
 	// Validation
 	req.checkBody('name', 'Name is required').notEmpty();
@@ -86,7 +87,7 @@ router.post('/register', function(req, res){
 			dob: null,
 			username: username,
 			password: password,
-			userType: "employee"
+			userType: userType
 		});
 
 		User.createUser(newUser, function(err, user){
@@ -339,10 +340,6 @@ passport.use(new LocalStrategy(
    	User.comparePassword(password, user.password, function(err, isMatch){
    		if(err) throw err;
    		if(isMatch){
-			var epath =  path.join(__dirname, '../') + "uploads/" + user._id;
-			if (!fs.existsSync(epath)){
-				fs.mkdirSync(epath);
-			}
    			return done(null, user);
    		} else {
    			return done(null, false, {message: 'Invalid password'});
@@ -363,7 +360,7 @@ passport.deserializeUser(function(id, done) {
 
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
-  function(req, res) {	 	
+  function(req, res) {
     res.redirect('/');
   });
 

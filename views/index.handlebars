@@ -23,6 +23,7 @@
           <th>Type</th>
           <th>Salary</th>
           <th>Deadline</th>
+		  
            {{#isEmployee user}}
           <th>Apply</th>
           {{else}}
@@ -49,24 +50,23 @@
           <td>{{this.salary}}</td>
           <td>{{this.deadline}}</td>
           <td><input type="submit" value="Apply" class="btn btn-default"></td>
+		  
           </form>
           </tr>
           {{/isDeadLine}}
           {{else}}
           <tr>
-
-          <form action="jobs/update" method="POST">
+		
+          <form action="jobs/updateForm" method="POST">
           <td>{{../this.post_date}}</td>
           <input type="hidden" value="{{../this._id}}" name="_id" />
-          <td><input class="form-control" type="text" name = "position" value="{{../this.position}}">{{../this.position}}</td>
-          <td><input class="form-control" type="text" name = "category" value="{{../this.category}}">{{../this.category}}</td>
-          <td><input class="form-control" type="text" name = "company" value="{{../this.company}}">{{../this.company}}</td>
-          <td><textarea class="form-control" type="textarea" name="description" id="description" placeholder="Description" maxlength="140" rows="7">{{../this.description}}</textarea>
-                        <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>                    
-                    </td>
-          <td><input class="form-control" type="text" name = "type" value="{{../this.type}}">{{../this.type}}</td>
-          <td><input class="form-control" type="number" name = "salary" value="{{../this.salary}}">{{../this.salary}}</td>
-          <td><input class="form-control" type="text" id="deadline" name = "deadline" value="{{../this.deadline}}">{{../this.deadline}}</td>
+          <td>{{../this.position}}</td>
+          <td>{{../this.category}}</td>
+          <td>{{../this.company}}</td>
+          <td>{{../this.description}}</td>
+          <td>{{../this.type}}</td>
+          <td>{{../this.salary}}</td>
+          <td>{{../this.deadline}}</td>
           <td><input type="submit" value="Update" class="btn btn-default"></td>
  </form>
  </tr>

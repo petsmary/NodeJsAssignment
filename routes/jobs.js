@@ -10,11 +10,50 @@ router.get('/', ensureAuthenticated, function(req, res) {
 	});
 });
 
+router.get('/rec', ensureAuthenticated, function(req, res) {
+	if(req.user.userType == 'admin') {
+		
+	
+	Job.getAllJobs(function(err, jobs){
+		if(err) throw err;
+		res.render('recruitments', {username: req.user.username, jobs: jobs});
+		
+	});
+	}
+});
+
 router.get('/addForm', ensureAuthenticated, function(req, res) {
 	if(req.user.userType == 'admin') {
 		res.render('addJobForm', {username: req.user.username});
 	}
 });
+
+router.post('/updateForm', ensureAuthenticated, function(req, res) {
+	if(req.user.userType == 'admin') {
+	
+	var id = req.body._id;
+	Job.getJobById(id, function(err, job){
+		if(err) {
+			console.log(err);
+						
+		} else {
+			
+			try {
+				var position = job.position;
+				var category = job.category;
+				var company = job.company;
+				var description = job.description;
+				var type = job.type;
+				var salary = job.salary;
+				var deadline = job.deadline;
+				res.render('editJobForm', {id: id, position: position, category: category, company: company, description: description, type: type, salary: salary, deadline: deadline});
+	
+	}catch (e) {
+				
+			}
+	}
+	})
+	}});
 
 // Add Job
 router.post('/add', function(req, res){
@@ -77,7 +116,7 @@ router.post('/update', function(req, res){
 	var type = req.body.type;
 	var salary = req.body.salary;
 	var deadline = req.body.deadline;
-	var id = req.body._id;
+	var id = req.body.id;
 
 	// Validation
 	req.checkBody('company', 'company is required').notEmpty();
@@ -126,7 +165,7 @@ router.post('/apply', function(req, res){
 
 	var recruitments = {
 		
-		employee_id :req.user._id, 
+		employee_id :req.user.username, 
 		date: new Date().toUTCString()
 	
 	};
@@ -139,7 +178,7 @@ router.post('/apply', function(req, res){
 			
 			try {
 				job.recruitments.forEach(function(element) {
-					if(req.user._id == element.employee_id) throw BreakException;
+					if(req.user.username == element.employee_id) throw BreakException;
 				});
 
 			job.recruitments.push(recruitments);
@@ -164,6 +203,19 @@ router.post('/apply', function(req, res){
 
 		
 		
+	
+});
+
+router.get('/applied', ensureAuthenticated, function(req, res) {
+	
+		var username = req.user.username;
+		
+	
+	Job.getJobsByEid(username, function(err, jobs){
+		if(err) throw err;
+		res.render('appliedJobs', {username: req.user.username, jobs: jobs});
+		
+	});
 	
 });
 
