@@ -18,6 +18,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var jobs = require('./routes/jobs');
 var profile = require('./routes/profile');
+var contacts = require('./routes/contacts');
 
 var handlebarsHelpers = require('./helpers/handlebars');
 
@@ -36,6 +37,7 @@ app.use(cookieParser());
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 // Express Session
 app.use(session({
@@ -82,6 +84,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/jobs', jobs);
 app.use('/profile', profile);
+app.use('/contacts', contacts);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

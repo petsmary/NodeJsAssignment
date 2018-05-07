@@ -11,11 +11,11 @@ router.get('/message', ensureAuthenticated, function(req, res){
 	res.render('message', { username: req.user.username });
 });
 
-router.get('/contactlg', ensureAuthenticated, function(req, res){
+router.get('/contact_us_lg', ensureAuthenticated, function(req, res){
 	res.render('contact', { username: req.user.username });
 });
 
-router.get('/contact', function(req, res){
+router.get('/contact_us', function(req, res){
 	res.render('contact');
 });
 

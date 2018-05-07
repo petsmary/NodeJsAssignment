@@ -5,6 +5,18 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../models/user');
 
+router.get('/', ensureAuthenticated, function(req, res) {
+	if(req.user.userType == 'admin') {
+		User.getAllUsers(function(err, users){
+			if(err) throw err;
+			res.render('user', {username: req.user.username, users: users});
+		});
+		
+	} else {
+		res.redirect('/profile/');
+	}
+});
+
 // Register
 router.get('/register', function(req, res){
 	res.render('register');
@@ -195,5 +207,14 @@ router.get('/logout', function(req, res){
 
 	res.redirect('/users/login');
 });
+
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		//req.flash('error_msg','You are not logged in');
+		res.redirect('/users/login');
+	}
+}
 
 module.exports = router;

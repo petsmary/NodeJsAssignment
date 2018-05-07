@@ -24,14 +24,14 @@
             {{#if user}}
              {{#isEmployee user}}
 			  <li role="presentation"><a href="/">Jobs</a></li>
-			  <li role="presentation"><a href="/contactlg">Contact Us</a></li>
+			  <li role="presentation"><a href="/contact_us_lg">Contact Us</a></li>
              
 			  <li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{username}}
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				  <li><a href="/message">Message</a></li>
-				  <li><a href="/profile/">Profile</a></li>
+				  <li><a href="/profile">Profile</a></li>
           <li><a href="/profile/cv">Upload CV</a></li>
 				  <li><a href="/users/logout">Logout</a></li>
 				</ul>
@@ -39,9 +39,9 @@
             
         {{else}}
 			  <li role="presentation"><a href="/">Jobs</a></li>
-        <li role="presentation"><a href="/">Users</a></li>
+        <li role="presentation"><a href="/users">Users</a></li>
         <li role="presentation"><a href="/">Recruitments</a></li>
-        <li role="presentation"><a href="/">Feedbacks</a></li>
+        <li role="presentation"><a href="/contacts">Contacts</a></li>
         <li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{username}}
           <span class="caret"></span></a>
@@ -52,7 +52,7 @@
             {{/isEmployee}}
             {{else}}
 			  <li role="presentation"><a href="/">Jobs</a></li>
-			  <li role="presentation"><a href="/contact">Contact Us</a></li>
+			  <li role="presentation"><a href="/contact_us">Contact Us</a></li>
               <li role="presentation"><a href="/users/login">Login</a></li>
               <li role="presentation"><a href="/users/register">Register</a></li>
             {{/if}}
