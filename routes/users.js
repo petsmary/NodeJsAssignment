@@ -19,6 +19,20 @@ router.get('/', ensureAuthenticated, function(req, res) {
 	}
 });
 
+router.get('/userInfo/:userInfo', ensureAuthenticated, function(req, res) {
+	if(req.user.userType == 'admin') {
+		var userInfo = req.params.userInfo;
+		console.log(userInfo)
+		User.getUserByUsername(userInfo, function(err, users){
+			if(err) throw err;
+			res.render('viewProfile', {userInfo: users});
+		});
+		
+	} else {
+		res.redirect('/profile/');
+	}
+});
+
 // Register
 router.get('/register', function(req, res){
 	res.render('register');
@@ -31,10 +45,6 @@ router.get('/addUser', ensureAuthenticated, function(req, res){
 
 // Login
 router.get('/login', function(req, res){
-	var epath =  path.join(__dirname, '../') + "uploads";
-			if (!fs.existsSync(epath)){
-				fs.mkdirSync(epath);
-			}
 	User.getUserByUsername("admin", function(err, user){
 		if(err) throw err;
 		if(!user){
@@ -121,7 +131,6 @@ router.post('/add', function(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
 	var password2 = req.body.password2;
-	var userType = req.body.userType;
 
 	// Validation
 	req.checkBody('name', 'Name is required').notEmpty();
@@ -345,7 +354,7 @@ passport.use(new LocalStrategy(
    	User.comparePassword(password, user.password, function(err, isMatch){
    		if(err) throw err;
    		if(isMatch){
-			var epath =  path.join(__dirname, '../') + "uploads/" + user._id;
+   			var epath =  path.join(__dirname, '../') + "uploads/" + user._id;
 			if (!fs.existsSync(epath)){
 				fs.mkdirSync(epath);
 			}

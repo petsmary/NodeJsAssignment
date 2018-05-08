@@ -1,0 +1,61 @@
+
+ <h2 class="page-header">User Profile</h2>
+
+<div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{userInfo.name}}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="profilePhoto" src="{{profilePhoto}}" class="img-circle img-responsive"> </div>
+                
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                      <tr>
+                        <td>Date of Birth</td>
+                        <td>{{userInfo.dob}}</td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>Gender</td>
+                        <td>{{userInfo.gender}}</td>
+                      </tr>
+                        <tr>
+                        <td>Home Address</td>
+                        <td>{{userInfo.address}}</td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><a href="{{userInfo.email}}">{{userInfo.email}}</a></td>
+                      </tr>
+                        <td>Phone Number</td>
+                        <td>{{userInfo.phone}}
+                        </td>
+                           
+                      </tr>
+                      <tr>
+                        <td>Experience</td>
+                        <td></td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                 
+                </div>
+              </div>
+            </div>
+               
+            
+          </div>
+        </div>
+      </div>
+    </div>	
+<br>

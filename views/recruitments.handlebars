@@ -22,7 +22,11 @@
 		   <td></td>
          
           <td></td>
-			<td>{{this.employee_id}}</td>
+		  
+			<td><a href="/users/userInfo/{{this.employee_id}}" value="{{this.employee_id}}" name="userInfo">{{this.employee_id}}</a></td>
+			<form>
+			<input type="hidden" value="{{this.employee_id}}" name="userInfo"/>
+			</form>
 			<td>{{this.date}}</td>
 			</tr>
           {{/each}}
