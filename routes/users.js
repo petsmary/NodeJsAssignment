@@ -47,6 +47,10 @@ router.get('/addUser', ensureAuthenticated, function(req, res){
 router.get('/login', function(req, res){
 	User.getUserByUsername("admin", function(err, user){
 		if(err) throw err;
+		var epath =  path.join(__dirname, '../') + "uploads";
+			if (!fs.existsSync(epath)){
+				fs.mkdirSync(epath);
+			}
 		if(!user){
 			var newAdmin = new User({
 				name: "admin",
