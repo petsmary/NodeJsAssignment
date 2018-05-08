@@ -4,7 +4,9 @@
 
  <div class="container"></div>
     {{#isEmployee user}}
- <button class="btn btn-default">Applied Job</button>
+ <form action="jobs/applied">
+ <input type="submit" value="Applied Job" class="btn btn-default">
+ </form>
  {{else}}
  <form action="jobs/addForm">
  <input type="submit" value="Add Job" class="btn btn-default">
